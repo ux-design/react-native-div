@@ -23,8 +23,7 @@
   },
   "homepage": "https://github.com/ux-design/react-native-div#readme",
   "dependencies": { 
-    "react-native-sound": "^0.9.1",
-    "react": "15.4.1",
-    "react-native": "0.42.0"
+    "react": "16.0.0-alpha.6",
+    "react-native": "0.43.3"
   }
 }
