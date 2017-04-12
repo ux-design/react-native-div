@@ -15,10 +15,12 @@ import {
 import * as Styler from './helpers/Styler'
 import * as Status from './status/index'
 import Animator from './helpers/Animator'
+import Sound from 'react-native-sound'
 
 let displayWidth = Status.displayWidth
 ,   displayHeight = Status.displayHeight
 ,   orientation = Status.orientation
+,   soundFile 
 
 export class Div extends Component {
 
@@ -62,8 +64,31 @@ export class Div extends Component {
     //console.log( 'end' ) ;
   }
 
+  _playSound( sound ){
+    setTimeout(()=>{
+      sound.play((success) => {
+        if (success) {
+          console.log('successfully finished playing');
+        } else {
+          console.log('playback failed due to audio decoding errors');
+        }
+      });
+    } , ( this.props.soundDelay ? this.props.soundDelay : 0 ) * 1000 ) ;
+  }
+
   componentWillMount() {
     this._initAnimation();
+    if ( this.props.sound || this.props.soundAfter ) {
+      soundFile = new Sound( `${this.props.sound || this.props.soundAfter}.mp3` , Sound.MAIN_BUNDLE, (error) => {
+        if (error) {
+          console.log('failed to load the sound', error);
+          return;
+        } 
+        // loaded successfully
+        console.log('duration in seconds: ' + soundFile.getDuration() + 'number of channels: ' + soundFile.getNumberOfChannels());
+        if ( this.props.sound ) this._playSound( soundFile ) ;
+      });
+    }
     if ( this.props.activatePan ) {
       this._panResponder = PanResponder.create({
         onStartShouldSetPanResponder: this._handleStartShouldSetPanResponder,
@@ -99,6 +124,9 @@ export class Div extends Component {
         ? me._animate( this.props.animate ) 
         : null 
       } , delay * 1000 ) ;
+      /*setTimeout( () => { 
+        me.setState( { ready : true } )
+      } , delay * 1000 + 1000 ) ;*/
     }
   }
 
@@ -126,6 +154,10 @@ export class Div extends Component {
                 Status.touch.moveY >= ta.yStart  &&
                 Status.touch.moveY <= ta.yEnd ) {
             if ( me.refs.anim ) {
+              if ( me.props.soundAfter ) {
+                console.log('pan sound')
+                me._playSound( soundFile ) ;
+              }
               me.refs.anim.setNativeProps({ style : { backgroundColor : 'orange' }});
               me._animate( 'ruzzleLetterOn' );
               if ( this.props.action ) {
@@ -162,6 +194,9 @@ export class Div extends Component {
   _onPress() {
     var me = this ;
     if ( this.props._onPress ) {
+      if ( this.props.soundAfter ) {
+        me._playSound( soundFile ) ;
+      }
       if ( this.props.animateAfter ) {
         if ( me.state.animation ) {
           me._animate( this.props.animateAfter )           
