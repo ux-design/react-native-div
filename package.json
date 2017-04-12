@@ -22,7 +22,7 @@
     "url": "https://github.com/ux-design/react-native-div/issues"
   },
   "homepage": "https://github.com/ux-design/react-native-div#readme",
-  "devDependencies": {
+  "dependencies": {
     "react": "15.4.1",
     "react-native": "0.42.0",
     "react-native-sound": "^0.9.1"
