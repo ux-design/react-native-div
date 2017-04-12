@@ -1,0 +1,28 @@
+{
+  "name": "react-native-div",
+  "version": "1.0.0",
+  "description": "This is a wrapper for react native that allows to easily create graphic layouts with relative dimensions from parent to children and easy and cool animations to present them ",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ux-design/react-native-div.git"
+  },
+  "keywords": [
+    "react",
+    "native",
+    "div"
+  ],
+  "author": "Andrea Mazzilli",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ux-design/react-native-div/issues"
+  },
+  "homepage": "https://github.com/ux-design/react-native-div#readme",
+  "devDependencies": {
+    "react": "15.4.1",
+    "react-native": "0.42.0"
+  }
+}
