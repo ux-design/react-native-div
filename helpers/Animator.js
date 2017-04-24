@@ -3,6 +3,14 @@ import {
   Easing,
 } from 'react-native'
 
+//this.state.animatedStartValue = 0;
+
+const cycleAnimation = function( payload ) {
+  Animated.sequence( payload.sequence ).start(() => {
+    cycleAnimation( payload );
+  });
+}
+
 const Animator = function( payload ) {
 
       const { name , callback } = payload ;
@@ -76,7 +84,7 @@ const Animator = function( payload ) {
         try { 
           animation = { 
             scale : new Animated.Value( 0 ),
-            opacity : new Animated.Value( 0 ),
+            opacity : new Animated.Value( 1 ),
           } ;
           this.setState( { animation : animation } ) ;
           Animated.spring( this.state.animation[ 'scale' ] , { useNativeDriver : true , toValue : 1 , friction : 5 } ).start() ;
@@ -108,11 +116,40 @@ const Animator = function( payload ) {
         try { 
           animation = { 
             scale : new Animated.Value( 2 ),
-            opacity : new Animated.Value( 2 ),
+            opacity : new Animated.Value( 1 ),
           } ;
           this.setState( { animation : animation } ) ;
           Animated.spring( this.state.animation[ 'scale' ] , { useNativeDriver : true , toValue : 1 , friction : 5 } ).start() ;
           Animated.spring( this.state.animation[ 'opacity' ] , { useNativeDriver : true , toValue : 1 , friction : 5 } ).start() ;
+        } catch( e ) {
+
+        }
+
+        case 'loopZoom':
+
+        try { 
+          animation = { 
+            scale : new Animated.Value( 1.7
+             ),
+            opacity : new Animated.Value( 1 ),
+          } ;
+          this.setState( { 
+            animation : animation
+          } ) ;
+
+          cycleAnimation( {
+                            sequence : [
+                                          Animated.timing( this.state.animation.scale, {
+                                            toValue: 2,
+                                            duration: 10000
+                                          }),
+                                          Animated.timing( this.state.animation.scale, {
+                                            toValue: 1.7,
+                                            duration: 10000
+                                          })
+                                        ]
+                          } ) 
+          
         } catch( e ) {
 
         }
