@@ -84,6 +84,22 @@ const Animator = function( payload ) {
         try { 
           animation = { 
             scale : new Animated.Value( 0 ),
+            opacity : new Animated.Value( 0 ),
+          } ;
+          this.setState( { animation : animation } ) ;
+          Animated.spring( this.state.animation[ 'scale' ] , { useNativeDriver : true , toValue : 1 , friction : 5 } ).start() ;
+          Animated.spring( this.state.animation[ 'opacity' ] , { useNativeDriver : true , toValue : 1 , friction : 5 } ).start() ;
+        } catch( e ) {
+          console.log( e )
+        }
+
+        break
+
+        case 'bounceInNoOpacity':
+
+        try { 
+          animation = { 
+            scale : new Animated.Value( 0 ),
             opacity : new Animated.Value( 1 ),
           } ;
           this.setState( { animation : animation } ) ;

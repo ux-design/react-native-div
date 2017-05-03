@@ -1,6 +1,6 @@
 {
   "name": "react-native-div",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "This is a wrapper for react native that allows to easily create graphic layouts with relative dimensions from parent to children and easy and cool animations to present them ",
   "main": "index.js",
   "scripts": {
@@ -22,8 +22,8 @@
     "url": "https://github.com/ux-design/react-native-div/issues"
   },
   "homepage": "https://github.com/ux-design/react-native-div#readme",
-  "dependencies": { 
-    "react": "16.0.0-alpha.6",
-    "react-native": "0.43.3"
+  "devDependencies": {
+    "react": "^16.0.0-alpha.6",
+    "react-native": "^0.43.3"
   }
 }
