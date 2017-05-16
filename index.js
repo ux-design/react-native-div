@@ -15,6 +15,7 @@ import {
 import * as Styler from './helpers/Styler'
 import * as Status from './status/index'
 import Animator from './helpers/Animator'
+import AnimatorCustom from './helpers/AnimatorCustom'
 
 let displayWidth = Status.displayWidth
 ,   displayHeight = Status.displayHeight
@@ -32,6 +33,7 @@ export class Div extends Component {
     this._handleScroll = this._handleScroll.bind( this );
     this._needsToBeAnimated = this._needsToBeAnimated.bind( this ) ;
     this._animate = this._animate.bind( this) ;
+    this._animateCustom = this._animateCustom.bind( this) ;
     this._initAnimation = this._initAnimation.bind( this ) ;
     this._initPan = this._initPan.bind( this ) ;
     this.Status = {}
@@ -93,11 +95,18 @@ export class Div extends Component {
   componentDidMount() {
     const delay = this.props.delay ;
     const me = this ;
-    if ( this.props.animate ) {
+    if ( this.props.animate || this.props.animateCustom ) {
       setTimeout( () => { 
-        me.state.animation 
-        ? me._animate( this.props.animate ) 
-        : null 
+        if ( me.state.animation ) {
+          if ( this.props.animate ) { 
+            me._animate( this.props.animate ) ;
+            console.log( 'animate' )
+          } ;
+          if ( this.props.animateCustom ) { 
+            me._animateCustom( this.props.animateCustom ) ;
+            console.log( 'animateCustom' )
+          } ;
+        }
       } , delay * 1000 ) ;
     }
   }
@@ -142,13 +151,20 @@ export class Div extends Component {
 
   _needsToBeAnimated() {
     let result = false  ;
-    this.props.animate  || this.props.animateAfter ? result = true : 0 ;
+    this.props.animate  || this.props.animateCustom  || this.props.animateAfter ? result = true : 0 ;
     return result
   }
 
   _animate( name , callback ) {
     setTimeout( ()=>{
       Animator.bind( this , { name , callback } )() ;
+    } , 10 )
+    
+  }
+
+  _animateCustom( payload , callback ) {
+    setTimeout( ()=>{
+      AnimatorCustom.bind( this , { anim : payload , callback : callback } )() ;
     } , 10 )
     
   }
@@ -164,7 +180,12 @@ export class Div extends Component {
     if ( this.props._onPress ) {
       if ( this.props.animateAfter ) {
         if ( me.state.animation ) {
-          me._animate( this.props.animateAfter )           
+          if ( this.props.animate ) { 
+            me._animate( this.props.animateAfter )           
+          }
+          if ( this.props.animateCustom ) { 
+            me._animateCustom( this.props.animateCustom )           
+          }
         }
         setTimeout( () => { 
           this.props._onPress() ;
