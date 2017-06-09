@@ -1,7 +1,21 @@
 # react-native-div
 This is a wrapper of the View element that speeds up the process of creating graphic layouts for your React Native app; it's easy to configure and it allows you to implement animations either predefined either custom.
 
-### Props
+# Installation
+
+`$ npm i --save react-native-div`
+
+```javascript
+import { Div } from 'react-native-div' ;
+
+...
+
+render(){
+  return <Div w="200" h="200" bgColor="green"></Div>
+}
+```
+
+# Props
 
 prop | typeof | value | description
 ------ | ---- | ------- | ----
@@ -18,8 +32,8 @@ animateCustom | `array` | [{x,y,r,s,o,t,f},{..] | animate the element with a [cu
 delay | `number` | 0,.5,1.2,.. | seconds of delay for this animation
 
 
-### <a name="predefinedanimations"></a>Predefined Animations
+# <a name="predefinedanimations"></a>Predefined Animations
 
 
 
-### <a name="customanimation"></a>Custom Animations
+# <a name="customanimation"></a>Custom Animations
