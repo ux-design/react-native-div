@@ -1,7 +1,7 @@
 # react-native-div
 This is a wrapper of the View element that speeds up the process of creating graphic layouts for your React Native app; it's easy to configure and it allows you to implement animations either predefined either custom.
 
-### Options
+### Props
 
 prop | typeof | value | description
 ------ | ---- | ------- | ----
@@ -13,7 +13,13 @@ vAlign | `string` | top,center,bottom | alignment in vertical mode
 bgColor | `string` | "red","#ffcc00",.. | background color with the same values of the normal styling
 column | `boolean` | true,false | align the content vertically
 _onPress | `function` | func... | call a function on touch event
-animate | `string` | [view the list](#predefinedanimations) | animate the element with a predefined animation
-animateCustom | `array` | [ { x : 100 , y : 100 , t : 1 } ] | animate the element with a custom animation 
+animate | `string` | [available animations](#predefinedanimations) | animate the element with a predefined animation
+animateCustom | `array` | [{x,y,r,s,o,t,f},{..] | animate the element with a [custom animation](#customanimation)
+delay | `number` | 0,.5,1.2,.. | seconds of delay for this animation
+
 
 ### <a name="predefinedanimations"></a>Predefined Animations
+
+
+
+### <a name="customanimation"></a>Custom Animations
