@@ -14,3 +14,4 @@ bgColor | `string` | "red","#ffcc00",.. | background color with the same values 
 column | `boolean` | true,false | align the content vertically
 _onPress | `function` | ()=>{} | call a function on touch event
 animate | `string` | view the list | animate the element with a predefined animation
+animateCustom | `array` | [ { x : 100 , y : 100 , t : 1 } ] | animate the element with a custom animation
